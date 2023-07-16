@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   web:
-    image: "prabirmahatha/node-todo-app-cicd:latest"
+    image: "node-to-do:v1"
     ports:
       - "8000:8000"
