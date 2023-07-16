@@ -13,7 +13,7 @@ spec:
         app: my-app
      spec:
       containers:
-        - name: Neeacr
+        - name: my-deployment
           image:  neeeacr.azurecr.io/ne-node:v2
           ports:
            - containerPort: 8000
