@@ -15,8 +15,8 @@ spec:
      spec:
       containers:
         - name: my-deployment
-          image: neeacr.azurecr.io/new:V3
+          image: newacrr.azurecr.io/mynewnode-to-do:1.0
           ports:
            - containerPort: 8000
       imagePullSecrets:
-        - name: acr-credentials
+        - name: new-secret
