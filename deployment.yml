@@ -30,5 +30,8 @@ spec:
               port: 8000
             initialDelaySeconds: 15
             periodSeconds: 60
+           envFrom:
+            - configMapRef:
+                name: my_deployment_config
       imagePullSecrets:
         - name: new-secret

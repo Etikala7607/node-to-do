@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: CM
-  namespace: default
+  name: my_deployment_config
+  namespace: bermtec
 data:
-  key: default
+  MY_ENV_VARIABLE: my_env
