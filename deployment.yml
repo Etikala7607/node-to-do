@@ -15,7 +15,7 @@ spec:
      spec:
       containers:
         - name: my-deployment
-          image:  neeeacr.azurecr.io/ne-node:v2
+          image: neeacr.azurecr.io/node-to-do:v2
           ports:
            - containerPort: 8000
       imagePullSecrets:
