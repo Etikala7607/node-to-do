@@ -42,8 +42,8 @@ spec:
                 name: my-config
       imagePullSecrets:
         - name: new-secret
-    strategy:
-      type: RollingUpdate
-      rollingUpdate:
-        maxUnavailable: 1
-        maxSurge: 1
+      strategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 1
+          maxSurge: 1
