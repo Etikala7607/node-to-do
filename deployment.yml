@@ -22,6 +22,14 @@ spec:
                     operator: In
                     values:
                       - my-app
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: label
+                    operator: In
+                    values:
+                      - my-app            
       containers:
         - name: my-deployment
           image: newacrr.azurecr.io/mynewnode-to-do:1.0
