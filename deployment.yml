@@ -18,21 +18,32 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: label
+                  - key: key
                     operator: In
                     values:
                       - my-app
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 1
-              preference:
+
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
                 matchExpressions:
-                  - key: label
+                  - key: app
                     operator: In
                     values:
-                      - my-app            
+                      - my-app
+              topologyKey: "kubernetes.io/hostname"
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - my-app
+            topologyKey: "kubernetes.io/hostname"
       containers:
         - name: my-deployment
-          image: newacrr.azurecr.io/mynewnode-to-do:1.0
+          image: newacrr.azurecr.io/node-todo:1.0
           ports:
             - containerPort: 8000
           resources:
@@ -53,6 +64,6 @@ spec:
               path: /health
               port: 8000
             initialDelaySeconds: 15
-            periodSeconds: 60 
+            periodSeconds: 60
       imagePullSecrets:
         - name: new-secret
