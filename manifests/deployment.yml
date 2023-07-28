@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: etikalanodetodo 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etikalanodetodo
+  template:
+    metadata:
+      labels:
+        app: etikalanodetodo 
+    spec:
+      containers:
+        - name: etikalanodetodo 
+          image: newacrr.azurecr.io/etikalanodetodo
+          ports:
+          - containerPort: 8000
