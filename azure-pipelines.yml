@@ -78,7 +78,7 @@ stages:
                 $(containerRegistry)/$(imageRepository):$(tag)
 
 - stage: DeployToprod
-  displayName: DeployToStage
+  displayName: DeployToprod
   dependsOn: DeployToDev
 
   jobs:
