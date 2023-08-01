@@ -43,7 +43,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
         - name: my-deployment
-          image: newacrr.azurecr.io/node-todo:1.0
+          image:  newacrr.azurecr.io/nodetodo:latest
           ports:
             - containerPort: 8000
           resources:
