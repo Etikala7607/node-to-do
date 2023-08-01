@@ -4,7 +4,6 @@
 
 trigger:
 - main
-- feature/*
 
 resources:
 - repo: self
@@ -12,12 +11,12 @@ resources:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '3dc8e011-ffe9-467b-af40-cff7188078a0'
-  imageRepository: 'nodetodo'
+  dockerRegistryServiceConnection: '4b53ffc7-25df-4b53-a750-c0a08f345e04'
+  imageRepository: 'etikalanodetodo'
   containerRegistry: 'newacrr.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'newacrr7606700d-auth'
+  imagePullSecret: 'newacrr19457d2e-auth'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -92,7 +91,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
-    environment: 'Etikala7607nodetodo-1015.bermtec'
+    environment: 'Etikala7607nodetodo-5619.bermtec'
     strategy:
       runOnce:
         deploy:
