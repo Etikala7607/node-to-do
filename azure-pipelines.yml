@@ -1,4 +1,14 @@
 # Deploy to Azure Kubernetes Service
+- task: HelmDeploy@0
+  inputs:
+    connectionType: 'Azure Resource Manager'
+    azureSubscription: 'Azure subscription 1(09596d8b-933e-4093-a627-78cef0237f46)'
+    azureResourceGroup: 'my_resource'
+    kubernetesCluster: 'newcluster'
+    namespace: 'bermtec'
+    command: 'install'
+    chartType: 'Name'
+    chartName: 'to-do'
 # Build and push image to Azure Container Registry; Deploy to Azure Kubernetes Service
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
@@ -20,98 +30,3 @@ variables:
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
-
-
-stages:
-- stage: Build
-  displayName: Build stage
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
-
-    - upload: manifests
-      artifact: manifests
-
-- stage: DeployToDev
-  displayName: Deploy To Dev
-  dependsOn: Build
-
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    pool:
-      vmImage: $(vmImageName)
-    environment: 'Etikala7607nodetodo-5619.bermtec'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: KubernetesManifest@0
-            displayName: Create imagePullSecret
-            inputs:
-              action: createSecret
-              secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
-            inputs:
-              action: deploy
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceConnection: 'My_Cluster'
-              manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
-
-- stage: DeployToprod
-  displayName: DeployToprod
-  dependsOn: DeployToDev
-
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy
-    pool:
-      vmImage: $(vmImageName)
-    environment: 'prod'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: KubernetesManifest@0
-            displayName: Create imagePullSecret
-            inputs:
-              action: createSecret
-              secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
-            inputs:
-              action: deploy
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceConnection: 'My_Cluster'
-              manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yaml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
-
-
