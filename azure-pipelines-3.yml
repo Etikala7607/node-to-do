@@ -84,5 +84,5 @@ stages:
               kubernetesCluster: 'newcluster'
               namespace: 'bermtec'
               command: 'install'
-              chartType: 'Name'
+              chartType: 'Path'
               chartPath: 'to-do'
