@@ -5,7 +5,7 @@
 replicaCount: 2
 
 image:
-  repository: newacrr.azurecr.io/newnode:1.o
+  repository: newacrr.azurecr.io/etikalanodetodo:latest
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.o"
