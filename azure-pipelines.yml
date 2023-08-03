@@ -39,9 +39,7 @@ variables:
     namespace: 'bermtec'
     command: 'upgrade'
     chartType: 'FilePath'
-<<<<<<< HEAD
     chartPath: 'to-do'
-=======
     chartPath: 'Node-to-do'
 - task: KubernetesManifest@1
   inputs:
@@ -50,4 +48,4 @@ variables:
     kubernetesServiceConnection: 'My_Cluster'
     namespace: 'bermtec'
     manifests: 'deployment.yml'
->>>>>>> b3e33bce149e738cc75cbdb648e7ac358f755af0
+
