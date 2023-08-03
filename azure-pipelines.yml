@@ -39,4 +39,4 @@ variables:
     namespace: 'bermtec'
     command: 'upgrade'
     chartType: 'FilePath'
-    chartPath: 'to-do'
+    chartPath: 'Node-to-do'
