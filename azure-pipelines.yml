@@ -40,3 +40,10 @@ variables:
     command: 'upgrade'
     chartType: 'FilePath'
     chartPath: 'Node-to-do'
+- task: KubernetesManifest@1
+  inputs:
+    action: 'deploy'
+    connectionType: 'kubernetesServiceConnection'
+    kubernetesServiceConnection: 'My_Cluster'
+    namespace: 'bermtec'
+    manifests: 'deployment.yml'
