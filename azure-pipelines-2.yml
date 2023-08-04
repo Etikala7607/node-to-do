@@ -72,6 +72,6 @@ stages:
               azureResourceGroup: 'my_resource'
               kubernetesCluster: 'newcluster'
               command: 'upgrade'
-              chartType: 'Name'
-              chartName: 'to-do'
+              chartType: 'Path'
+              chartPath: 'C:\Devops Prac\node-to-do\to-do'
 
